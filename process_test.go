@@ -4,6 +4,8 @@ import (
 	"io/ioutil"
 	"testing"
 
+	"github.com/davidbyttow/govips"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,9 +20,8 @@ func TestResize(t *testing.T) {
 	buf, err = Process(buf, options)
 	require.Nil(t, err)
 
-	// TODO(d): Figure out why this image is failing to load
-	// resized, err := govips.NewImageFromBuffer(buf, nil)
-	// require.Nil(t, err)
+	resized, err := govips.NewImageFromBuffer(buf, nil)
+	require.Nil(t, err)
 
-	// assert.Equal(t, 320, resized.Width())
+	assert.Equal(t, 640, resized.Width())
 }

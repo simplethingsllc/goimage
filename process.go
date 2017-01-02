@@ -3,14 +3,14 @@ package gotransform
 import (
 	"math"
 
-	"github.com/davidbyttow/gimage"
 	moreMath "github.com/davidbyttow/gomore/math"
+	"github.com/davidbyttow/govips"
 )
 
 func Process(buf []byte, options *Options) ([]byte, error) {
-	defer gimage.ShutdownThread()
+	defer govips.ShutdownThread()
 
-	image, err := gimage.NewImageFromBuffer(buf, nil)
+	image, err := govips.NewImageFromBuffer(buf, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -23,7 +23,7 @@ func Process(buf []byte, options *Options) ([]byte, error) {
 	return image.WriteToBuffer(".jpeg", nil)
 }
 
-func makeImage(sourceBytes []byte, image *gimage.Image, options *Options) (*gimage.Image, error) {
+func makeImage(sourceBytes []byte, image *govips.Image, options *Options) (*govips.Image, error) {
 
 	// TODO(d): Rotation
 
@@ -99,7 +99,7 @@ func makeImage(sourceBytes []byte, image *gimage.Image, options *Options) (*gima
 	// Optionally prevent enlargement
 
 	// imageType := image.Type()
-	// canShrinkOnLoad := (imageType == gimage.ImageTypeJpeg || imageType == gimage.ImageTypeWebp) &&
+	// canShrinkOnLoad := (imageType == govips.ImageTypeJpeg || imageType == govips.ImageTypeWebp) &&
 	// 	!hasGammaAdjustment
 
 	// shrinkFactor := 1

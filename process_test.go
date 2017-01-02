@@ -19,7 +19,7 @@ func TestResize(t *testing.T) {
 	require.Nil(t, err)
 
 	// TODO(d): Figure out why this image is failing to load
-	// resized, err := gimage.NewImageFromBuffer(buf, nil)
+	// resized, err := govips.NewImageFromBuffer(buf, nil)
 	// require.Nil(t, err)
 
 	// assert.Equal(t, 320, resized.Width())

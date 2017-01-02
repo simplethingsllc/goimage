@@ -11,6 +11,15 @@ const (
 	ResizeStrategyStretch
 )
 
+type Flip int
+
+const (
+	FlipNone Flip = iota
+	FlipX
+	FlipY
+	FlipXY
+)
+
 type Gravity int
 
 const (
@@ -53,10 +62,20 @@ const (
 	CropStrategyAttention
 )
 
-type GaussianBlur struct {
-	Sigma float64
-}
+type ImageFormat int
 
-type Sharpen struct {
-	Sigma float64
-}
+const (
+	ImageFormatUnknown ImageFormat = iota
+	ImageFormatBmp
+	ImageFormatJpeg
+	ImageFormatPng
+	ImageFormatWebp
+)
+
+type HistogramOperation int
+
+const (
+	HistogramOperationNone HistogramOperation = iota
+	HistogramOperationCumulative
+	HistogramOperationNormalize
+)

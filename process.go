@@ -158,10 +158,10 @@ func makeImage(sourceBytes []byte, image *govips.Image, options *Options) (*govi
 
 	if shrink {
 		if yShrink > 1 {
-			image = image.Shrinkv(yShrink, nil)
+			image = image.Shrinkv(yShrink)
 		}
 		if xShrink > 1 {
-			image = image.Shrinkh(xShrink, nil)
+			image = image.Shrinkh(xShrink)
 		}
 		shrunkWidth := image.Width()
 		shrunkHeight := image.Height()
@@ -173,10 +173,10 @@ func makeImage(sourceBytes []byte, image *govips.Image, options *Options) (*govi
 		if xResidual < 1.0 || yResidual < 1.0 {
 			// TODO(d): Pass in kernel
 			if yResidual < 1.0 {
-				image = image.Reducev(1.0/yResidual, nil)
+				image = image.Reducev(1.0 / yResidual)
 			}
 			if xResidual < 1.0 {
-				image = image.Reduceh(1.0/xResidual, nil)
+				image = image.Reduceh(1.0 / xResidual)
 			}
 		}
 	}

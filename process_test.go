@@ -10,6 +10,9 @@ import (
 )
 
 func TestResize(t *testing.T) {
+	govips.Startup(nil)
+	defer govips.Shutdown()
+
 	buf, err := ioutil.ReadFile("fixtures/canyon.jpg")
 	require.Nil(t, err)
 

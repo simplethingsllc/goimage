@@ -26,6 +26,7 @@ func Process(buf []byte, options *Options) ([]byte, error) {
 func makeImage(sourceBytes []byte, image *govips.Image, options *Options) (*govips.Image, error) {
 
 	// TODO(d): Rotation
+	debug("Processing options: %#v", *options)
 
 	imageWidth := float64(image.Width())
 	imageHeight := float64(image.Height())
@@ -34,6 +35,7 @@ func makeImage(sourceBytes []byte, image *govips.Image, options *Options) (*govi
 	yFactor := 1.0
 	desiredWidth := getOptionValue(imageWidth, options.Width)
 	desiredHeight := getOptionValue(imageHeight, options.Height)
+
 	if desiredWidth > 0 && desiredHeight > 0 {
 		xFactor = imageWidth / desiredWidth
 		yFactor = imageHeight / desiredHeight
@@ -188,10 +190,9 @@ func getOptionValue(source float64, option *ValueOption) float64 {
 	out := source
 	if option != nil {
 		if option.IsInt() {
-			out = float64(option.Int())
-		} else {
-			out = out * option.Double()
+			return float64(option.Int())
 		}
+		return out * option.Double()
 	}
-	return out
+	return 0
 }

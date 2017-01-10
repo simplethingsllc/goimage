@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/davidbyttow/govips"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -23,10 +22,11 @@ func TestResize(t *testing.T) {
 	buf, err = Process(buf, options)
 	require.Nil(t, err)
 
-	GoldenCompare(t, buf, "testdata/resize-golden.jpg")
-
 	resized, err := govips.NewImageFromBuffer(buf, nil)
 	require.Nil(t, err)
 
-	assert.Equal(t, 640, resized.Width())
+	require.Equal(t, 640, resized.Width())
+	require.Equal(t, 400, resized.Height())
+
+	GoldenCompare(t, buf, "testdata/resize-golden.jpg")
 }

@@ -13,7 +13,7 @@ func TestResize(t *testing.T) {
 	govips.Startup(nil)
 	defer govips.Shutdown()
 
-	buf, err := ioutil.ReadFile("fixtures/canyon.jpg")
+	buf, err := ioutil.ReadFile("testdata/canyon.jpg")
 	require.Nil(t, err)
 
 	options := &Options{
@@ -22,6 +22,8 @@ func TestResize(t *testing.T) {
 
 	buf, err = Process(buf, options)
 	require.Nil(t, err)
+
+	GoldenCompare(t, buf, "testdata/resize-golden.jpg")
 
 	resized, err := govips.NewImageFromBuffer(buf, nil)
 	require.Nil(t, err)

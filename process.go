@@ -7,6 +7,7 @@ import (
 	"github.com/davidbyttow/govips"
 )
 
+// Process takes any image processes it with the given options
 func Process(buf []byte, options *Options) ([]byte, error) {
 	defer govips.ShutdownThread()
 
@@ -40,6 +41,8 @@ func makeImage(sourceBytes []byte, image *govips.Image, options *Options) (*govi
 		xFactor = imageWidth / desiredWidth
 		yFactor = imageHeight / desiredHeight
 		switch options.ResizeStrategy {
+		case ResizeStrategyDefault:
+			fallthrough
 		case ResizeStrategyCrop:
 			fallthrough
 		case ResizeStrategyPad:

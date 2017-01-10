@@ -1,8 +1,8 @@
 package gotransform
 
+// Options specifies how to process the input image
 type Options struct {
 	BackgroundColor    *RGBA
-	Blur               int
 	CenterSampling     bool
 	CropOffsetX        *ValueOption
 	CropOffsetY        *ValueOption
